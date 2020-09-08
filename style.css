@@ -41,29 +41,29 @@ img {
 }
 
 .apple {
-	background-image: url('apple.png');
+	background-image: url('images/apple.png');
 }
 
 .bricks {
-	background-image: url('bricks.png');
+	background-image: url('images/bricks.png');
 }
 
 .star {
-	background-image: url('star.png');
+	background-image: url('images/star.png');
 }
 
 .snake {
-	background-image: url('snake.png');
+	background-image: url('images/snake.png');
 }
 
 .head {
-	background-image: url('head.png');
+	background-image: url('images/head.png');
 }
 
 .dead_head {
-	background-image: url('dead_head.png');
+	background-image: url('images/dead_head.png');
 }
 
 .dead_snake {
-	background-image: url('dead_snake.png');
+	background-image: url('images/dead_snake.png');
 }
