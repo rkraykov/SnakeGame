@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const headerStar = document.getElementsByTagName('img');
 	const width = 14;
 	const height = 14;
-	let apple = Math.floor(Math.random() * width*height);
+	const area = width * height;
+	let apple;
 	let direction = 1;
 	let currentScore = 0;
 	let currentSnake = [71,72,73];
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-	for (let i = 0; i < width*height; i++) {
+	for (let i = 0; i < area; i++) {
 		let div = document.createElement('div');
 		grid.appendChild(div);
 	}
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			squares[i].classList.remove('bricks');
 			squares[i].style.opacity = '1';
 		});
-		squares[apple].classList.remove('apple');
+		if (apple >= 0) squares[apple].classList.remove('apple');
 		if (star >= 0) {
 			squares[star].classList.remove('star');
 			star = -1;
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function showStar(show){
 		if (show) {
-			do {star = Math.floor(Math.random() * width*height);}
+			do {star = randomNum();}
 			while ((currentSnake.indexOf(star) >= 0) || 
 				(allBricks.indexOf(star) >= 0) || 
 				(star === apple));
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		snakeHead = currentSnake[currentSnake.length - 1];
 		let newHead = snakeHead + direction;
 
-		if ((newHead > width*height-1 ) || (newHead < 0) ||
+		if ((newHead > area-1 ) || (newHead < 0) ||
 			((direction === 1) && (newHead % width === 0)) ||
 			((direction === -1) && (newHead % height === height-1)) ||
 			(currentSnake.indexOf(newHead) >= 0) ||
@@ -162,17 +163,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function randomApple() {
-		do {apple = Math.floor(Math.random() * width*height);}
+		do {apple = randomNum();}
 		while (currentSnake.indexOf(apple) >= 0 || (allBricks.indexOf(apple) >= 0));
 		squares[apple].classList.add('apple');
 	}
 
 	function randomBricks() {
-		do {bricks = Math.floor(Math.random() * width*height);}
+		do {bricks = randomNum();}
 		while (currentSnake.indexOf(bricks) >= 0 || (bricks === apple));
 		squares[bricks].classList.add('bricks');
 		if (goTruBricks) squares[bricks].style.opacity = '0.5';
 		allBricks.push(bricks);
+	}
+
+	function randomNum(){
+		return Math.floor(Math.random() * area);
 	}
 
 	function control(e) {
